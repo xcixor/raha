@@ -1,0 +1,110 @@
+version: 2.1
+
+orbs:
+  cloudrun: circleci/gcp-cloud-run@1.0.2
+
+commands:
+  install_rok8s_scripts:
+    steps:
+      - run:
+          name: Install Rok8s-Scripts
+          command: |
+            mkdir ${HOME}/rok8s-scripts && curl -L https://github.com/FairwindsOps/rok8s-scripts/archive/v11.1.3.tar.gz | \
+            tar xz -C ${HOME}/rok8s-scripts
+            echo 'export PATH=$PATH:${HOME}/rok8s-scripts/rok8s-scripts-11.1.3/bin' >> ${BASH_ENV}
+  setup_service_account:
+    steps:
+      - run:
+          name: Setup Service Key Account
+          command: |
+            mkdir -p keys
+            touch keys/gcloud-service-key.json
+            echo "${SERVICE_ACCOUNT_KEY}" > keys/gcloud-service-key.json
+  setup_env_file:
+    steps:
+      - run:
+          name: setup_env_file
+          command: |
+            bash scripts/create_env_file.sh
+
+jobs:
+  test:
+    machine:
+      image: ubuntu-2204:2024.05.1
+    working_directory: ~/raha
+    steps:
+      - checkout
+      - setup_env_file
+      - run:
+          name: Run Tests
+          command: |
+            make ci-test
+  push_service_image:
+    machine:
+      image: ubuntu-2204:2024.05.1
+    working_directory: ~/raha
+    steps:
+      - checkout
+      - install_rok8s_scripts
+      - run: prepare-gcloud
+      - setup_service_account
+      - run:
+          name: Configure Docker for Artifact Registry
+          command: |
+            gcloud auth configure-docker us-east1-docker.pkg.dev
+      - setup_env_file
+      - run:
+          name: Build Tag and Push raha Docker Image
+          command: |
+            docker-build -f deploy/build.config
+            docker-push -f deploy/build.config
+  deploy_service_cloud_run:
+    machine:
+      image: ubuntu-2204:2024.05.1
+    parameters:
+      environment:
+        description: "The environment where to deploy the application"
+        default: staging
+        type: string
+      service-account-name:
+        description: The service account the app uses for access to GCP resources.
+        type: string
+        default: staging@radiant-destiny-370910.iam.gserviceaccount.com
+    steps:
+      - checkout
+      - cloudrun/init
+      - cloudrun/deploy:
+          image: "us-east1-docker.pkg.dev/${GOOGLE_PROJECT_ID}/raha/raha:${CIRCLE_SHA1}"
+          platform: managed
+          region: us-east1
+          service-name: raha-<< parameters.environment >>
+          unauthenticated: true
+          args: --service-account=<< parameters.service-account-name >>
+
+workflows:
+  raha-flow:
+    jobs:
+      - test:
+          context:
+            - pndungu_gcp
+      - push_service_image:
+          requires:
+            - test
+          context:
+            - pndungu_gcp
+      - deploy_service_cloud_run:
+          requires:
+            - push_service_image
+          context:
+            - pndungu_gcp
+      - production_deploy_hold:
+          type: approval
+          requires:
+            - push_service_image
+      - deploy_service_cloud_run:
+          context:
+            - pndungu_gcp
+          environment: production
+          service-account-name: production@radiant-destiny-370910.iam.gserviceaccount.com
+          requires:
+            - production_deploy_hold
