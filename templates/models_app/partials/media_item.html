@@ -1,0 +1,14 @@
+<div class="relative group aspect-square bg-gray-900 rounded-lg overflow-hidden border border-gray-700">
+    {% if media.is_video %}
+        <video src="{{ media.file.url }}" class="w-full h-full object-cover"></video>
+        <div class="absolute inset-0 flex items-center justify-center bg-black/40">
+            <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"/></svg>
+        </div>
+    {% else %}
+        <img src="{{ media.file.url }}" alt="Gallery Item" class="w-full h-full object-cover">
+    {% endif %}
+    
+    <button class="absolute top-2 right-2 p-1 bg-red-600 rounded-full opacity-0 group-hover:opacity-100 transition">
+        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    </button>
+</div>
