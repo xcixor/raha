@@ -1,0 +1,87 @@
+[
+  {
+    "model": "models_app.service",
+    "pk": 1,
+    "fields": {
+      "name": "Massage",
+      "slug": "massage"
+    }
+  },
+  {
+    "model": "models_app.service",
+    "pk": 2,
+    "fields": {
+      "name": "Full Service",
+      "slug": "full-service"
+    }
+  },
+  {
+    "model": "models_app.service",
+    "pk": 3,
+    "fields": {
+      "name": "Outcall",
+      "slug": "outcall"
+    }
+  },
+  {
+    "model": "models_app.service",
+    "pk": 4,
+    "fields": {
+      "name": "Incall",
+      "slug": "incall"
+    }
+  },
+  {
+    "model": "models_app.service",
+    "pk": 5,
+    "fields": {
+      "name": "Dinner Date",
+      "slug": "dinner-date"
+    }
+  },
+  {
+    "model": "models_app.location",
+    "pk": 1,
+    "fields": {
+      "name": "Kilimani",
+      "slug": "kilimani",
+      "is_primary": true
+    }
+  },
+  {
+    "model": "models_app.location",
+    "pk": 2,
+    "fields": {
+      "name": "Westlands",
+      "slug": "westlands",
+      "is_primary": true
+    }
+  },
+  {
+    "model": "models_app.location",
+    "pk": 3,
+    "fields": {
+      "name": "Nairobi CBD",
+      "slug": "nairobi-cbd",
+      "is_primary": true
+    }
+  },
+  {
+    "model": "models_app.location",
+    "pk": 4,
+    "fields": {
+      "name": "Mombasa Road",
+      "slug": "mombasa-road",
+      "is_primary": true
+    }
+  },
+  {
+    "model": "models_app.location",
+    "pk": 5,
+    "fields": {
+      "name": "Langata",
+      "slug": "langata",
+      "is_primary": true
+    }
+  }
+]

@@ -15,10 +15,6 @@ class OnboardingView(LoginRequiredMixin, View):
             profile = form.save(commit=False)
             profile.user = request.user
             
-            # Save as comma-separated string for SQLite compat
-            profile.locations = ",".join(request.POST.getlist('locations'))
-            profile.services = ",".join(request.POST.getlist('services'))
-
             # Handle Optional Blurring
             if request.POST.get('blur_face') == 'on' and 'pfp' in request.FILES:
                 blurrer = BlurService()
@@ -26,5 +22,8 @@ class OnboardingView(LoginRequiredMixin, View):
                 profile.pfp.save(request.FILES['pfp'].name, blurred_image, save=False)
             
             profile.save()
-            return redirect('/') # Home or Dashboard
+            # M2M needs save_m2m() or manual assignment after profile.save()
+            form.save_m2m()
+            
+            return redirect('/')
         return render(request, 'models_app/onboarding.html', {'form': form})

@@ -1,6 +1,21 @@
 from django.db import models
 from django.conf import settings
 
+class Service(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.name
+
+class Location(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField(max_length=100, unique=True)
+    is_primary = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name
+
 class ModelProfile(models.Model):
     ORIENTATION_CHOICES = [
         ('straight', 'Straight'),
@@ -16,9 +31,9 @@ class ModelProfile(models.Model):
     is_verified = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
     
-    # Using TextField with simple comma-separated values for SQLite
-    locations = models.TextField(default='', blank=True)
-    services = models.TextField(default='', blank=True)
+    # Switch to M2M for proper fixture usage and relations
+    locations = models.ManyToManyField(Location, related_name='models', blank=True)
+    services = models.ManyToManyField(Service, related_name='models', blank=True)
     
     orientation = models.CharField(max_length=20, choices=ORIENTATION_CHOICES, default='straight')
     description = models.TextField(blank=True)
