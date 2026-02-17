@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-md mx-auto mt-10 p-6 bg-gray-800 rounded-lg shadow-xl">
+    <h2 class="text-2xl font-bold mb-6 text-center">Join Raha</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="space-y-4">
+            {% for field in form %}
+            <div>
+                <label class="block text-sm font-medium mb-1">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                <p class="text-red-500 text-xs mt-1">{{ field.errors.0 }}</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <button type="submit" class="w-full bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded transition duration-200">
+                Register
+            </button>
+        </div>
+    </form>
+</div>
+
+<style>
+    input {
+        width: 100%;
+        background-color: #374151;
+        border: 1px solid #4B5563;
+        color: white;
+        padding: 0.5rem;
+        border-radius: 0.25rem;
+    }
+</style>
+{% endblock %}

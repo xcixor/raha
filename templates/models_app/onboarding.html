@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto mt-10 p-8 bg-gray-800 rounded-lg shadow-xl">
+    <h2 class="text-3xl font-bold mb-8 text-center text-pink-500">Model Onboarding</h2>
+    
+    <form method="post" enctype="multipart/form-data" class="space-y-6">
+        {% csrf_token %}
+        
+        <!-- Basic Info -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <label class="block text-sm font-semibold mb-2">Model Name</label>
+                {{ form.model_name }}
+            </div>
+            <div>
+                <label class="block text-sm font-semibold mb-2">Sexual Orientation</label>
+                {{ form.orientation }}
+            </div>
+        </div>
+
+        <!-- PFP Upload -->
+        <div class="p-4 border-2 border-dashed border-gray-600 rounded-lg bg-gray-900">
+            <label class="block text-sm font-semibold mb-3 text-pink-400">Profile Picture (Verification Required)</label>
+            {{ form.pfp }}
+            <div class="mt-4 flex items-center">
+                <input type="checkbox" name="blur_face" id="blur_face" class="mr-2 h-4 w-4 bg-gray-700 border-gray-600">
+                <label for="blur_face" class="text-sm text-gray-300">Blur my face in this photo</label>
+            </div>
+        </div>
+
+        <!-- Locations Checkboxes -->
+        <div>
+            <label class="block text-sm font-semibold mb-3 text-pink-400">Primary Locations</label>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                {% for loc in form.LOCATIONS_LIST %}
+                <label class="flex items-center space-x-2 p-2 rounded bg-gray-700 hover:bg-gray-600 transition cursor-pointer">
+                    <input type="checkbox" name="locations" value="{{ loc }}" class="h-4 w-4 text-pink-600 bg-gray-900 border-gray-700">
+                    <span class="text-sm">{{ loc }}</span>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Services Checkboxes -->
+        <div>
+            <label class="block text-sm font-semibold mb-3 text-pink-400">Services Provided</label>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                {% for svc in form.SERVICES_LIST %}
+                <label class="flex items-center space-x-2 p-2 rounded bg-gray-700 hover:bg-gray-600 transition cursor-pointer">
+                    <input type="checkbox" name="services" value="{{ svc }}" class="h-4 w-4 text-pink-600 bg-gray-900 border-gray-700">
+                    <span class="text-sm">{{ svc }}</span>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Description -->
+        <div>
+            <label class="block text-sm font-semibold mb-2">Bio / Advertising Description</label>
+            {{ form.description }}
+        </div>
+
+        <button type="submit" class="w-full bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200 shadow-lg transform hover:scale-[1.01]">
+            Complete Registration
+        </button>
+    </form>
+</div>
+
+<style>
+    input[type="text"], select, textarea {
+        width: 100%;
+        background-color: #111827;
+        border: 1px solid #374151;
+        color: white;
+        padding: 0.75rem;
+        border-radius: 0.5rem;
+        outline: none;
+    }
+    input[type="text"]:focus, select:focus, textarea:focus {
+        border-color: #DB2777;
+    }
+</style>
+{% endblock %}
