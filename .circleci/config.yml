@@ -86,24 +86,24 @@ workflows:
     jobs:
       - test:
           context:
-            - pndungu_gcp
+            - millenial4genz_gcp
       - push_service_image:
           requires:
             - test
           context:
-            - pndungu_gcp
+            - millenial4genz_gcp
       - deploy_service_cloud_run:
           requires:
             - push_service_image
           context:
-            - pndungu_gcp
+            - millenial4genz_gcp
       - production_deploy_hold:
           type: approval
           requires:
             - push_service_image
       - deploy_service_cloud_run:
           context:
-            - pndungu_gcp
+            - millenial4genz_gcp
           environment: production
           service-account-name: production@radiant-destiny-370910.iam.gserviceaccount.com
           requires:
