@@ -3,6 +3,7 @@ from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ModelOnboardingForm
 from .services import BlurService
+from .models import ModelProfile
 
 class OnboardingView(LoginRequiredMixin, View):
     def get(self, request):
@@ -14,16 +15,18 @@ class OnboardingView(LoginRequiredMixin, View):
         if form.is_valid():
             profile = form.save(commit=False)
             profile.user = request.user
+            profile.save()
+            form.save_m2m()
             
-            # Handle Optional Blurring
+            # Re-fetch or verify
+            print(f"Profile saved. Locations: {profile.locations.all()}")
+            
             if request.POST.get('blur_face') == 'on' and 'pfp' in request.FILES:
                 blurrer = BlurService()
                 blurred_image = blurrer.process_image(request.FILES['pfp'])
-                profile.pfp.save(request.FILES['pfp'].name, blurred_image, save=False)
-            
-            profile.save()
-            # M2M needs save_m2m() or manual assignment after profile.save()
-            form.save_m2m()
+                profile.pfp.save(request.FILES['pfp'].name, blurred_image, save=True)
             
             return redirect('/')
-        return render(request, 'models_app/onboarding.html', {'form': form})
+        else:
+            print(f"Form errors: {form.errors}")
+            return render(request, 'models_app/onboarding.html', {'form': form})
