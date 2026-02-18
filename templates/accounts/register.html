@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="max-w-md mx-auto mt-10 p-6 bg-gray-800 rounded-lg shadow-xl">
-    <h2 class="text-2xl font-bold mb-6 text-center">Join Raha</h2>
+    <h2 class="text-2xl font-bold mb-6 text-center">{{ title }}</h2>
     <form method="post">
         {% csrf_token %}
         <div class="space-y-4">
@@ -15,11 +15,23 @@
                 {% endif %}
             </div>
             {% endfor %}
+            {% if form.non_field_errors %}
+            <div class="text-red-500 text-sm mt-1">
+                {{ form.non_field_errors.0 }}
+            </div>
+            {% endif %}
             <button type="submit" class="w-full bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded transition duration-200">
-                Register
+                {{ button_text }}
             </button>
         </div>
     </form>
+    <div class="mt-4 text-center text-sm">
+        {% if button_text == 'Register' %}
+        Already have an account? <a href="{% url 'accounts:login' %}" class="text-pink-500 hover:underline">Login here</a>
+        {% else %}
+        Don't have an account? <a href="{% url 'accounts:register' %}" class="text-pink-500 hover:underline">Register here</a>
+        {% endif %}
+    </div>
 </div>
 
 <style>

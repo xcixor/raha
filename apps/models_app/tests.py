@@ -26,14 +26,16 @@ class ModelBehaviorTest(TestCase):
             'pfp': pfp,
             'orientation': 'straight',
             'description': 'Hello world',
-            'locations': [self.loc.pk],
-            'services': [self.svc.pk]
+            'primary_location': self.loc.pk,
+            'nearby_locations': [self.loc.pk],
+            'services': [self.svc.pk],
+            'privacy_protection': 'blur'
         }
         
         response = self.client.post(reverse('models:onboarding'), data)
         self.assertEqual(response.status_code, 302)
         profile = ModelProfile.objects.get(user=self.user)
-        self.assertEqual(profile.locations.count(), 1)
+        self.assertEqual(profile.primary_location, self.loc)
 
     @override_settings(MEDIA_ROOT=tempfile.gettempdir())
     def test_model_can_upload_gallery_media(self):
@@ -45,12 +47,12 @@ class ModelBehaviorTest(TestCase):
             b'\x01\x0a\x00\x01\x00\x2c\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02'
             b'\x02\x4c\x01\x00\x3b'
         )
-        ModelProfile.objects.create(user=self.user, model_name="Test Model")
+        ModelProfile.objects.create(user=self.user, model_name="Test Model", pfp='test.jpg', primary_location=self.loc)
         photo = SimpleUploadedFile('gallery1.gif', small_gif, content_type='image/gif')
         
         response = self.client.post(reverse('models:gallery_upload'), {
             'file': photo,
-            'blur_face': 'off'
+            'privacy_protection': 'none'
         }, HTTP_HX_REQUEST='true')
 
         self.assertEqual(response.status_code, 200)

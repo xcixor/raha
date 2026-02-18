@@ -1,0 +1,10 @@
+<div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+    {% for location in locations %}
+    <label class="flex items-center space-x-2 p-2 rounded bg-gray-700 hover:bg-gray-600 transition cursor-pointer">
+        <input type="checkbox" name="nearby_locations" value="{{ location.pk }}" class="rounded border-gray-600 bg-gray-800 text-pink-600">
+        <span class="text-sm">{{ location.name }}</span>
+    </label>
+    {% empty %}
+    <p class="text-gray-500 text-xs italic col-span-full">No extra spots found nearby.</p>
+    {% endfor %}
+</div>

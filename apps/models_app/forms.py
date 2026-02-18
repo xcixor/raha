@@ -2,13 +2,32 @@ from django import forms
 from .models import ModelProfile, Service, Location
 
 class ModelOnboardingForm(forms.ModelForm):
-    blur_face = forms.BooleanField(required=False, label="Blur my face in PFP")
+    PROTECTION_CHOICES = [
+        ('none', 'None'),
+        ('blur', 'Black Smudge'),
+        ('emoji', 'Hide with Emoji 😎'),
+    ]
     
-    locations = forms.ModelMultipleChoiceField(
+    privacy_protection = forms.ChoiceField(
+        choices=PROTECTION_CHOICES,
+        initial='none',
+        widget=forms.RadioSelect(attrs={'class': 'hidden peer'}),
+        label="Face Protection"
+    )
+    
+    primary_location = forms.ModelChoiceField(
+        queryset=Location.objects.all(),
+        required=True,
+        empty_label="Select your primary location",
+        widget=forms.Select(attrs={'class': 'w-full bg-gray-900 border border-gray-700 text-white rounded p-2 focus:border-pink-500 outline-none'})
+    )
+    
+    nearby_locations = forms.ModelMultipleChoiceField(
         queryset=Location.objects.all(),
         widget=forms.CheckboxSelectMultiple,
-        required=True
+        required=False
     )
+    
     services = forms.ModelMultipleChoiceField(
         queryset=Service.objects.all(),
         widget=forms.CheckboxSelectMultiple,
@@ -17,8 +36,7 @@ class ModelOnboardingForm(forms.ModelForm):
 
     class Meta:
         model = ModelProfile
-        fields = ('model_name', 'pfp', 'orientation', 'description', 'locations', 'services')
+        fields = ('model_name', 'pfp', 'orientation', 'description', 'primary_location', 'nearby_locations', 'services')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Explicitly setting the fields to avoid exclusion issues

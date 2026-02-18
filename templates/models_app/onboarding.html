@@ -1,10 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
+<!-- Full Screen Loader Overlay -->
+<div id="onboarding-loader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-gray-900/90 htmx-indicator backdrop-blur-sm">
+    <div class="relative w-24 h-24">
+        <div class="absolute inset-0 border-4 border-pink-500/20 rounded-full"></div>
+        <div class="absolute inset-0 border-4 border-pink-500 rounded-full border-t-transparent animate-spin"></div>
+    </div>
+    <h3 class="mt-6 text-xl font-bold text-white">Protecting your privacy...</h3>
+    <p class="mt-2 text-gray-400">Processing images and setting up your profile</p>
+</div>
+
 <div class="max-w-2xl mx-auto mt-10 p-8 bg-gray-800 rounded-lg shadow-xl">
     <h2 class="text-3xl font-bold mb-8 text-center text-pink-500">Model Onboarding</h2>
     
-    <form method="post" enctype="multipart/form-data" class="space-y-6">
+    <form hx-post="{% url 'models:onboarding' %}" 
+          hx-encoding="multipart/form-data"
+          hx-indicator="#onboarding-loader"
+          class="space-y-6">
         {% csrf_token %}
         
         <!-- Basic Info -->
@@ -21,32 +34,67 @@
             </div>
         </div>
 
-        <!-- PFP Upload -->
+        <!-- PFP Upload & Protection -->
         <div class="p-4 border-2 border-dashed border-gray-600 rounded-lg bg-gray-900">
             <label class="block text-sm font-semibold mb-3 text-pink-400">Profile Picture (Verification Required)</label>
             {{ form.pfp }}
             {{ form.pfp.errors }}
-            <div class="mt-4 flex items-center">
-                {{ form.blur_face }}
-                <label for="{{ form.blur_face.id_for_label }}" class="ml-2 text-sm text-gray-300">Blur my face in this photo</label>
+            
+            <div class="mt-6 bg-gray-800 p-4 rounded-lg">
+                <label class="block text-xs font-bold text-gray-400 uppercase mb-3">Privacy Protection Mode</label>
+                <div class="flex flex-wrap gap-6">
+                    {% for radio in form.privacy_protection %}
+                    <label class="flex items-center space-x-2 cursor-pointer group">
+                        {{ radio.tag }}
+                        <span class="text-sm group-hover:text-pink-400 transition">{{ radio.choice_label }}</span>
+                    </label>
+                    {% endfor %}
+                </div>
             </div>
         </div>
 
-        <!-- Locations Checkboxes -->
-        <div>
-            <label class="block text-sm font-semibold mb-3 text-pink-400">Primary Locations</label>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                {% for checkbox in form.locations %}
-                <label class="flex items-center space-x-2 p-2 rounded bg-gray-700 hover:bg-gray-600 transition cursor-pointer">
-                    {{ checkbox.tag }}
-                    <span class="text-sm">{{ checkbox.choice_label }}</span>
-                </label>
-                {% endfor %}
+        <!-- Locations -->
+        <div class="space-y-6">
+            <div>
+                <div class="flex items-center justify-between mb-3">
+                    <label class="block text-sm font-semibold text-pink-400">Primary Location</label>
+                    <!-- HTMX Indicator for location fetching -->
+                    <div id="location-spinner" class="htmx-indicator">
+                        <svg class="animate-spin h-4 w-4 text-pink-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div hx-target="#nearby-locations-list" hx-swap="innerHTML" hx-indicator="#location-spinner">
+                    {% with primary_field=form.primary_location %}
+                        <select name="{{ primary_field.name }}" 
+                                id="{{ primary_field.id_for_label }}"
+                                hx-get="{% url 'models:nearby_locations_htmx' %}"
+                                hx-trigger="change"
+                                hx-vals='js:{primary_location_id: event.target.value}'
+                                hx-on::after-request="document.getElementById('nearby-locations-container').classList.remove('hidden')"
+                                class="w-full bg-gray-900 border border-gray-700 text-white rounded p-2 focus:border-pink-500 outline-none">
+                            {% for choice in primary_field.field.choices %}
+                                <option value="{{ choice.0 }}" {% if choice.0 == primary_field.value %}selected{% endif %}>{{ choice.1 }}</option>
+                            {% endfor %}
+                        </select>
+                    {% endwith %}
+                </div>
+                {{ form.primary_location.errors }}
             </div>
-            {{ form.locations.errors }}
+
+            <div id="nearby-locations-container" class="hidden">
+                <label class="block text-sm font-semibold mb-3 text-pink-400">Nearby / Extra Locations</label>
+                <div id="nearby-locations-list">
+                    <!-- HTMX swaps content here -->
+                </div>
+                {{ form.nearby_locations.errors }}
+            </div>
         </div>
 
-        <!-- Services Checkboxes -->
+        <!-- Services -->
         <div>
             <label class="block text-sm font-semibold mb-3 text-pink-400">Services Provided</label>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -86,12 +134,67 @@
     input[type="text"]:focus, select:focus, textarea:focus {
         border-color: #DB2777;
     }
+    
+    input[type="radio"] {
+        appearance: none;
+        -webkit-appearance: none;
+        display: inline-block !important;
+        width: 1.1rem;
+        height: 1.1rem;
+        border: 2px solid #4B5563;
+        border-radius: 50%;
+        background: #111827;
+        cursor: pointer;
+        position: relative;
+        vertical-align: middle;
+        margin-right: 0.5rem;
+    }
+    input[type="radio"]:checked {
+        border-color: #DB2777;
+    }
+    input[type="radio"]:checked::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background: #DB2777;
+    }
+
     input[type="checkbox"] {
-        height: 1rem;
+        display: none;
+    }
+    input[type="checkbox"] + span::before {
+        content: '';
+        display: inline-block;
         width: 1rem;
-        background-color: #111827;
-        border-color: #374151;
+        height: 1rem;
+        border: 1px solid #4B5563;
         border-radius: 0.25rem;
+        background: #111827;
+        vertical-align: middle;
+        margin-right: 0.5rem;
+    }
+    input[type="checkbox"]:checked + span::before {
+        background: #DB2777;
+        border-color: #DB2777;
+    }
+
+    .htmx-indicator {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 200ms ease-in;
+    }
+    .htmx-request .htmx-indicator {
+        opacity: 1;
+        pointer-events: all;
+    }
+    .htmx-request.htmx-indicator {
+        opacity: 1;
+        pointer-events: all;
     }
 </style>
 {% endblock %}
