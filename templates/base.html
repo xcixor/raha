@@ -16,13 +16,19 @@
             </div>
             <div>
                 {% if user.is_authenticated %}
-                    <span>{{ user.phone_number }}</span>
+                    {% if user.profile %}
+                        <a href="{% url 'models:profile_detail' slug=user.profile.slug %}" class="text-pink-400 hover:text-pink-300 font-medium">
+                            {{ user.profile.model_name }}
+                        </a>
+                    {% else %}
+                        <span class="text-gray-400">{{ user.phone_number }}</span>
+                    {% endif %}
                     <form action="{% url 'accounts:logout' %}" method="post" class="inline">
                         {% csrf_token %}
-                        <button type="submit" class="ml-4 text-sm text-gray-400">Logout</button>
+                        <button type="submit" class="ml-4 text-sm text-gray-400 hover:text-white transition-colors">Logout</button>
                     </form>
                 {% else %}
-                    <a href="{% url 'accounts:login' %}" class="text-sm">Login</a>
+                    <a href="{% url 'accounts:login' %}" class="text-sm font-medium hover:text-pink-500 transition-colors">Login</a>
                 {% endif %}
             </div>
         </div>
