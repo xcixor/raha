@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
-from .models import User
+from ..models import User
 
 class RegistrationBehaviorTest(TestCase):
     def test_user_can_register_with_phone_and_password(self):

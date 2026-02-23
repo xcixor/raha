@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from django.core.files.uploadedfile import SimpleUploadedFile
 from apps.accounts.models import User
-from .models import Location, Service, ModelProfile
+from ..models import Location, Service, ModelProfile
 
 class RefinedLocationTest(TestCase):
     def setUp(self):

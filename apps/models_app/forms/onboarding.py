@@ -1,5 +1,5 @@
 from django import forms
-from .models import ModelProfile, Service, Location
+from ..models import ModelProfile, Service, Location
 
 class ModelOnboardingForm(forms.ModelForm):
     PROTECTION_CHOICES = [
@@ -46,3 +46,8 @@ class ModelOnboardingForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+class GalleryUploadForm(forms.ModelForm):
+    class Meta:
+        model = ModelProfile
+        fields = []

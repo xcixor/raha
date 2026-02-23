@@ -3,7 +3,7 @@ from django.test import TestCase, override_settings
 from django.urls import reverse
 from django.core.files.uploadedfile import SimpleUploadedFile
 from apps.accounts.models import User
-from .models import Location, Service, ModelProfile
+from ..models import Location, Service, ModelProfile
 
 class ModelBehaviorTest(TestCase):
     def setUp(self):

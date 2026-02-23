@@ -4,13 +4,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponse
 from django.urls import reverse
 from django.db import transaction
-from .forms import ModelOnboardingForm
-from .services import BlurService
-from .services_verification import VerificationService
-from .models import ModelProfile, ModelMedia
+from ..forms import ModelOnboardingForm
+from ..services import BlurService
+from ..services_verification import VerificationService
+from ..models import ModelProfile, ModelMedia
 
 from django.views.generic import ListView, DetailView
-from .models import ModelProfile, ModelMedia
+from ..models import ModelProfile, ModelMedia
 
 class ModelListView(ListView):
     model = ModelProfile

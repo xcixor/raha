@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
-from .models import Location, Service, ModelProfile
+from ..models import Location, Service, ModelProfile
 from apps.accounts.models import User
 
 class UniqueConstraintTest(TestCase):

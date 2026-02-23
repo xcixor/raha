@@ -1,7 +1,7 @@
 import re
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import User
+from ..models import User
 
 class UserRegistrationForm(forms.ModelForm):
     phone_number = forms.CharField(

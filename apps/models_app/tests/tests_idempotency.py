@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from django.core.files.uploadedfile import SimpleUploadedFile
 from apps.accounts.models import User
-from .models import ModelProfile, Location, Service
+from ..models import ModelProfile, Location, Service
 
 class OnboardingIdempotencyTest(TestCase):
     def setUp(self):

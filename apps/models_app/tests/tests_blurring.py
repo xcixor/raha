@@ -3,7 +3,7 @@ import numpy as np
 import tempfile
 from django.test import TestCase, override_settings
 from django.core.files.uploadedfile import SimpleUploadedFile
-from .services import BlurService
+from ..services import BlurService
 
 class FaceBlurringTest(TestCase):
     def setUp(self):

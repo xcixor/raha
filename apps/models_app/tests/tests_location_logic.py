@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
-from .models import County, LocationGroup, Location
+from ..models import County, LocationGroup, Location
 
 class LocationHierarchyTest(TestCase):
     def setUp(self):

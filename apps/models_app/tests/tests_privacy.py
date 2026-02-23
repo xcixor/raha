@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.core.files.uploadedfile import SimpleUploadedFile
 import cv2
 import numpy as np
-from .services import BlurService, OpenCVFaceBlurrer
+from ..services import BlurService, OpenCVFaceBlurrer
 
 class PrivacyProtectionTest(TestCase):
     def setUp(self):

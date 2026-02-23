@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth import login, authenticate, logout
-from .forms import UserRegistrationForm, LoginForm
-from .models import User
+from ..forms import UserRegistrationForm, LoginForm
+from ..models import User
 
 class RegisterView(View):
     def get(self, request):

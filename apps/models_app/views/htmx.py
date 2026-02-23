@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Location
+from ..models import Location
 
 def get_nearby_locations(request):
     primary_location_id = request.GET.get('primary_location_id')

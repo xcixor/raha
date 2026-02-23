@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 from apps.accounts.models import User
-from .models import ModelProfile, Location, Service
+from ..models import ModelProfile, Location, Service
 from django.core.files.uploadedfile import SimpleUploadedFile
 import io
 from PIL import Image
