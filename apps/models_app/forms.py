@@ -36,7 +36,13 @@ class ModelOnboardingForm(forms.ModelForm):
 
     class Meta:
         model = ModelProfile
-        fields = ('model_name', 'pfp', 'orientation', 'description', 'primary_location', 'nearby_locations', 'services')
+        fields = ('model_name', 'pfp', 'short_summary', 'orientation', 'description', 'primary_location', 'nearby_locations', 'services')
+        widgets = {
+            'short_summary': forms.TextInput(attrs={
+                'class': 'w-full bg-gray-900 border border-gray-700 text-white rounded p-2 focus:border-pink-500 outline-none',
+                'placeholder': 'E.g. The hottest model in Nairobi'
+            }),
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

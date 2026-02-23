@@ -27,6 +27,7 @@ class AsyncOnboardingTest(TestCase):
         data = {
             'model_name': 'AsyncModel',
             'pfp': pfp,
+            'short_summary': 'Hottest model in town',
             'orientation': 'straight',
             'description': 'Hello world',
             'primary_location': self.loc.pk,

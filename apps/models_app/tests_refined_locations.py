@@ -28,6 +28,7 @@ class RefinedLocationTest(TestCase):
         data = {
             'model_name': 'Test Model',
             'pfp': pfp,
+            'short_summary': 'Hottest in Westlands',
             'orientation': 'straight',
             'description': 'Description',
             'primary_location': self.loc1.pk,

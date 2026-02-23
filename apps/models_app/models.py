@@ -43,6 +43,7 @@ class ModelProfile(models.Model):
 
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile')
     model_name = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField(max_length=120, unique=True, blank=True)
     pfp = models.ImageField(upload_to='profiles/pfp/')
     is_verified = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
@@ -54,10 +55,17 @@ class ModelProfile(models.Model):
     services = models.ManyToManyField(Service, related_name='models', blank=True)
     
     orientation = models.CharField(max_length=20, choices=ORIENTATION_CHOICES, default='straight')
+    short_summary = models.CharField(max_length=40)
     description = models.TextField(blank=True)
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            from django.utils.text import slugify
+            self.slug = slugify(self.model_name)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.model_name

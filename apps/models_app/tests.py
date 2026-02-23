@@ -25,6 +25,7 @@ class ModelBehaviorTest(TestCase):
             'model_name': 'Hottie X',
             'pfp': pfp,
             'orientation': 'straight',
+            'short_summary': 'Hottest in town',
             'description': 'Hello world',
             'primary_location': self.loc.pk,
             'nearby_locations': [self.loc.pk],

@@ -12,6 +12,8 @@ Behavioral tests will be written using `pytest` and `Django TestCase`.
 - Model onboarding requires compulsory fields (name, pfp, primary location).
 - Optional face blurring correctly modifies the image buffer using OpenCV before storage.
 - M2M relations for locations and services are correctly persisted.
+- Model profiles are publicly listable (when active) and detail views include a protected gallery.
+- **Verification System**: Service layer for verifying or rejecting profiles, ensuring only verified profiles become active.
 
 ## 3. Security Check
 - `.env` is ignored. 

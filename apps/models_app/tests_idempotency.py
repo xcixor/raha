@@ -26,6 +26,7 @@ class OnboardingIdempotencyTest(TestCase):
 
         data = {
             'model_name': 'First Try',
+            'short_summary': 'Summary 1',
             'orientation': 'straight',
             'description': 'Description 1',
             'primary_location': self.loc.pk,

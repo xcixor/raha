@@ -9,6 +9,31 @@ from .services import BlurService
 from .services_verification import VerificationService
 from .models import ModelProfile, ModelMedia
 
+from django.views.generic import ListView, DetailView
+from .models import ModelProfile, ModelMedia
+
+class ModelListView(ListView):
+    model = ModelProfile
+    template_name = 'models_app/list.html'
+    context_object_name = 'models'
+    paginate_by = 20
+    ordering = ['-created_at']
+
+    def get_queryset(self):
+        return ModelProfile.objects.filter(is_active=True).select_related('primary_location').order_by('-created_at')
+
+class ModelDetailView(DetailView):
+    model = ModelProfile
+    template_name = 'models_app/profile_detail.html'
+    context_object_name = 'profile'
+    slug_url_kwarg = 'slug'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Check if the current user is the owner of this profile
+        context['is_owner'] = self.request.user.is_authenticated and self.request.user == self.object.user
+        return context
+
 class OnboardingView(LoginRequiredMixin, View):
     def get(self, request):
         # If profile exists, populate form
@@ -23,6 +48,7 @@ class OnboardingView(LoginRequiredMixin, View):
         if form.is_valid():
             profile = form.save(commit=False)
             profile.user = request.user
+            profile.is_active = True  # Auto-activate for now so they show up on Discover
             profile.save()
             form.save_m2m()
             
@@ -40,11 +66,6 @@ class OnboardingView(LoginRequiredMixin, View):
                 
             return redirect('/')
         return render(request, 'models_app/onboarding.html', {'form': form})
-
-class ProfileDetailView(LoginRequiredMixin, View):
-    def get(self, request):
-        profile = get_object_or_404(ModelProfile, user=request.user)
-        return render(request, 'models_app/profile_detail.html', {'profile': profile})
 
 class GalleryUploadView(LoginRequiredMixin, View):
     def post(self, request):
