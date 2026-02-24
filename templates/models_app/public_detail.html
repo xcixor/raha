@@ -13,31 +13,34 @@
         <img src="{{ profile.pfp.url }}" class="w-32 h-32 rounded-full object-cover border-4 border-pink-500 shadow-xl">
         
         <div class="flex-1 text-center md:text-left">
-            <h1 class="text-4xl font-bold">{{ profile.model_name }}</h1>
-            
-            <div class="mt-2 space-y-1">
-                <p class="text-pink-500 font-medium italic text-lg">{{ profile.short_summary }}</p>
+            <div class="bg-white/5 p-4 rounded-xl mb-4">
+                <h1 class="text-4xl font-bold">{{ profile.model_name }}</h1>
                 
-                <div class="flex flex-wrap justify-center md:justify-start items-center text-gray-400 mt-2 gap-2">
-                    <span>{{ profile.get_orientation_display }}</span>
-                    <span class="hidden md:inline">•</span>
-                    <span class="text-white font-semibold">{{ profile.primary_location.name }}</span>
+                <div class="mt-2 space-y-1">
+                    <p class="text-pink-500 font-medium italic text-lg">{{ profile.short_summary }}</p>
                     
-                    {% if profile.nearby_locations.exists %}
-                    <span class="text-gray-600">|</span>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="text-xs uppercase font-bold text-gray-500">Nearby:</span>
-                        {% for loc in profile.nearby_locations.all %}
-                            <a href="{% url 'models:list' %}?county={{ loc.group.county.slug }}&location={{ loc.slug }}" class="text-xs bg-gray-700 hover:bg-pink-600 text-gray-300 hover:text-white px-2 py-0.5 rounded transition-colors">
-                                {{ loc.name }}
-                            </a>
-                        {% endfor %}
+                    <div class="flex flex-wrap justify-center md:justify-start items-center text-gray-400 mt-2 gap-2">
+                        <span>{{ profile.get_orientation_display }}</span>
+                        <span class="hidden md:inline">•</span>
+                        <span class="text-white font-semibold">{{ profile.primary_location.name }}</span>
+                        
+                        {% if profile.nearby_locations.exists %}
+                        <span class="text-gray-600">|</span>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs uppercase font-bold text-gray-500">Nearby:</span>
+                            {% for loc in profile.nearby_locations.all %}
+                                <a href="{% url 'models:list' %}?county={{ loc.group.county.slug }}&location={{ loc.slug }}" class="text-xs bg-gray-700 hover:bg-pink-600 text-gray-300 hover:text-white px-2 py-0.5 rounded transition-colors">
+                                    {{ loc.name }}
+                                </a>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
                     </div>
-                    {% endif %}
                 </div>
+            </div>
 
-                <!-- Contact Buttons -->
-                <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 mt-6" x-data="{ 
+            <!-- Contact Buttons -->
+            <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4" x-data="{ 
                     openWa(phone) {
                         const link = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
                             ? `https://wa.me/${phone}`
