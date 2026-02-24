@@ -35,6 +35,25 @@
                     </div>
                     {% endif %}
                 </div>
+
+                <!-- Contact Buttons -->
+                <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 mt-6" x-data="{ 
+                    openWa(phone) {
+                        const link = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
+                            ? `https://wa.me/${phone}`
+                            : `https://web.whatsapp.com/send?phone=${phone}`;
+                        window.open(link, '_blank');
+                    }
+                }">
+                    <a href="tel:{{ profile.user.phone_number }}" 
+                       class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-8 rounded-lg flex items-center justify-center transition-all transform hover:scale-105 shadow-lg">
+                        <i class="fa-solid fa-phone mr-2"></i> CALL NOW
+                    </a>
+                    <button @click="openWa('{{ profile.whatsapp_number }}')" 
+                            class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg flex items-center justify-center transition-all transform hover:scale-105 shadow-lg">
+                        <i class="fa-brands fa-whatsapp mr-2 text-xl"></i> WHATSAPP
+                    </button>
+                </div>
             </div>
         </div>
     </div>

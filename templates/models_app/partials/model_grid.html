@@ -13,7 +13,27 @@
                     </svg>
                     {{ model.primary_location.name }}
                 </p>
-                <p class="text-xs text-pink-400 italic font-medium truncate">{{ model.short_summary }}</p>
+                <p class="text-xs text-pink-400 italic font-medium truncate mb-3">{{ model.short_summary }}</p>
+                
+                <!-- Contact Buttons -->
+                <div class="flex space-x-2" x-data="{ 
+                    openWa(phone) {
+                        const link = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
+                            ? `https://wa.me/${phone}`
+                            : `https://web.whatsapp.com/send?phone=${phone}`;
+                        window.open(link, '_blank');
+                    }
+                }">
+                    <a href="tel:{{ model.user.phone_number }}" 
+                       @click.stop 
+                       class="flex-1 bg-gray-700 hover:bg-gray-600 text-white text-[10px] font-bold py-1.5 rounded flex items-center justify-center transition-colors">
+                        <i class="fa-solid fa-phone mr-1"></i> CALL
+                    </a>
+                    <button @click.stop.prevent="openWa('{{ model.whatsapp_number }}')" 
+                            class="flex-1 bg-green-600 hover:bg-green-700 text-white text-[10px] font-bold py-1.5 rounded flex items-center justify-center transition-colors">
+                        <i class="fa-brands fa-whatsapp mr-1 text-sm"></i> WHATSAPP
+                    </button>
+                </div>
             </div>
             
             {% if model.is_verified %}

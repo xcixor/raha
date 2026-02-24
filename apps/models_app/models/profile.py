@@ -39,3 +39,13 @@ class ModelProfile(models.Model):
 
     def __str__(self):
         return self.model_name
+
+    @property
+    def whatsapp_number(self):
+        """Returns phone number in 2547XXXXXXXX format"""
+        phone = self.user.phone_number
+        if phone.startswith('0'):
+            return f"254{phone[1:]}"
+        if phone.startswith('+'):
+            return phone[1:]
+        return phone
