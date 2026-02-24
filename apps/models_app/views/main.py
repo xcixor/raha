@@ -47,10 +47,13 @@ class ModelListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        from ..models import County, Location
+        from ..models import County, Location, Service
         
         # Popular/Top Counties
         context['counties'] = County.objects.all()[:10] 
+        
+        # Services
+        context['all_services'] = Service.objects.all().order_by('name')
         
         # Default to Nairobi if no county selected
         active_county_slug = self.request.GET.get('county', 'nairobi')

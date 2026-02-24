@@ -1,5 +1,5 @@
 <div class="flex items-center space-x-2 overflow-x-auto pb-4 no-scrollbar">
-    <button hx-get="{% url 'models:list' %}?county={{ active_county.slug }}&location=all"
+    <button hx-get="{% url 'models:list' %}?county={{ active_county.slug }}&location=all&service={{ request.GET.service|default:'all' }}"
             hx-target="#model-grid"
             hx-indicator="#grid-loader"
             hx-push-url="true"
@@ -10,7 +10,7 @@
     </button>
     
     {% for loc in locations %}
-    <button hx-get="{% url 'models:list' %}?county={{ active_county.slug }}&location={{ loc.slug }}"
+    <button hx-get="{% url 'models:list' %}?county={{ active_county.slug }}&location={{ loc.slug }}&service={{ request.GET.service|default:'all' }}"
             hx-target="#model-grid"
             hx-indicator="#grid-loader"
             hx-push-url="true"

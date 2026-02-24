@@ -3,7 +3,8 @@
 {% block content %}
 <div class="container mx-auto px-4" x-data="{ 
     activeCounty: '{{ active_county.slug|default:'nairobi' }}',
-    activeLocation: '{{ active_location_slug|default:'all' }}'
+    activeLocation: '{{ active_location_slug|default:'all' }}',
+    activeService: '{{ request.GET.service|default:'all' }}'
 }">
     <!-- County Selector Row -->
     <div class="mb-4">
@@ -13,7 +14,7 @@
             <button hx-get="{% url 'models:filter_locations_htmx' %}?county={{ county.slug }}"
                     hx-target="#location-row"
                     hx-indicator="#location-loader"
-                    @click="activeCounty = '{{ county.slug }}'; activeLocation = 'all'"
+                    @click="activeCounty = '{{ county.slug }}'; activeLocation = 'all'; activeService = 'all'"
                     :class="activeCounty === '{{ county.slug }}' ? 'border-pink-500 text-pink-500' : 'border-gray-700 text-gray-400 hover:border-gray-500'"
                     class="px-4 py-1.5 rounded-lg border-2 text-sm font-bold transition-all whitespace-nowrap">
                 {{ county.name }}
@@ -22,6 +23,33 @@
             <div id="location-loader" class="htmx-indicator ml-2">
                 <i class="fa-solid fa-circle-notch animate-spin text-pink-500"></i>
             </div>
+        </div>
+    </div>
+
+    <!-- Service Selector Row -->
+    <div class="mb-6">
+        <h3 class="text-xs font-bold text-gray-500 uppercase mb-3 ml-1">Filter by Service</h3>
+        <div class="flex items-center space-x-2 overflow-x-auto pb-2 no-scrollbar">
+            <button hx-get="{% url 'models:list' %}?county={{ active_county.slug }}&location={{ active_location }}&service=all"
+                    hx-target="#model-grid"
+                    hx-indicator="#grid-loader"
+                    hx-push-url="true"
+                    @click="activeService = 'all'"
+                    :class="activeService === 'all' ? 'bg-pink-600 text-white' : 'bg-gray-800 text-gray-300 hover:bg-gray-700'"
+                    class="px-4 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap">
+                All Services
+            </button>
+            {% for service in all_services %}
+            <button hx-get="{% url 'models:list' %}?county={{ active_county.slug }}&location={{ active_location }}&service={{ service.slug }}"
+                    hx-target="#model-grid"
+                    hx-indicator="#grid-loader"
+                    hx-push-url="true"
+                    @click="activeService = '{{ service.slug }}'"
+                    :class="activeService === '{{ service.slug }}' ? 'bg-pink-600 text-white' : 'bg-gray-800 text-gray-300 hover:bg-gray-700'"
+                    class="px-4 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap">
+                {{ service.name }}
+            </button>
+            {% endfor %}
         </div>
     </div>
 
