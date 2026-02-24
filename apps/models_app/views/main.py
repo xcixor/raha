@@ -117,6 +117,15 @@ class BaseProfileUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView)
         profile = self.get_object()
         return self.request.user == profile.user
 
+    def get(self, request, *args, **kwargs):
+        if request.GET.get('mode') == 'display':
+            self.object = self.get_object()
+            return render(self.request, self.display_template, {
+                'profile': self.object, 
+                'is_owner': True
+            })
+        return super().get(request, *args, **kwargs)
+
     def form_valid(self, form):
         response = super().form_valid(form)
         if self.request.headers.get('HX-Request'):
@@ -156,17 +165,12 @@ class ServicesUpdateView(BaseProfileUpdateView):
     template_name = 'models_app/partials/inline_edit_services.html'
     display_template = 'models_app/partials/inline_display_services.html'
 
-class PFPUpdateView(LoginRequiredMixin, UserPassesTestMixin, View):
-    def test_func(self):
-        profile = get_object_or_404(ModelProfile, slug=self.kwargs['slug'])
-        return self.request.user == profile.user
-
-    def get(self, request, slug):
-        profile = get_object_or_404(ModelProfile, slug=slug)
-        return render(request, 'models_app/partials/inline_edit_pfp.html', {'profile': profile})
+class PFPUpdateView(BaseProfileUpdateView):
+    template_name = 'models_app/partials/inline_edit_pfp.html'
+    display_template = 'models_app/partials/inline_display_pfp.html'
 
     def post(self, request, slug):
-        profile = get_object_or_404(ModelProfile, slug=slug)
+        profile = self.get_object()
         pfp_file = request.FILES.get('pfp')
         
         if pfp_file:
@@ -180,7 +184,7 @@ class PFPUpdateView(LoginRequiredMixin, UserPassesTestMixin, View):
                 profile.pfp = pfp_file
                 profile.save()
         
-        return render(request, 'models_app/partials/inline_display_pfp.html', {
+        return render(request, self.display_template, {
             'profile': profile, 
             'is_owner': True
         })

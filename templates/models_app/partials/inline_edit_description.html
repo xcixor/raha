@@ -16,10 +16,9 @@
         <div class="flex space-x-2">
             <button type="submit" class="bg-pink-600 px-6 py-2 rounded text-sm font-bold flex-1">Save Description</button>
             <button type="button" 
-                    hx-get="{% url 'models:profile_detail' slug=profile.slug %}" 
+                    hx-get="{% url 'models:edit_description' slug=profile.slug %}?mode=display" 
                     hx-target="#description-container" 
                     hx-swap="outerHTML"
-                    hx-select="#description-container"
                     class="bg-gray-700 px-6 py-2 rounded text-sm font-bold">Cancel</button>
         </div>
 
