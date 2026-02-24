@@ -42,6 +42,16 @@ class ModelDetailView(DetailView):
         context['is_owner'] = self.request.user.is_authenticated and self.request.user == self.object.user
         return context
 
+class ModelPublicDetailView(DetailView):
+    model = ModelProfile
+    template_name = 'models_app/public_detail.html'
+    context_object_name = 'profile'
+    slug_url_kwarg = 'slug'
+
+    def get_queryset(self):
+        # Only show active profiles publicly
+        return ModelProfile.objects.filter(is_active=True)
+
 class BaseProfileUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = ModelProfile
     slug_url_kwarg = 'slug'

@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block title %}{{ profile.model_name }} | Raha Discovery{% endblock %}
+
+{% block content %}
+<!-- Slick Slider CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
+<div class="max-w-4xl mx-auto">
+    <!-- Header Section -->
+    <div class="bg-gray-800 rounded-lg p-6 mb-8 flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-6">
+        <img src="{{ profile.pfp.url }}" class="w-32 h-32 rounded-full object-cover border-4 border-pink-500 shadow-xl">
+        
+        <div class="flex-1 text-center md:text-left">
+            <h1 class="text-4xl font-bold">{{ profile.model_name }}</h1>
+            
+            <div class="mt-2 space-y-1">
+                <p class="text-pink-500 font-medium italic text-lg">{{ profile.short_summary }}</p>
+                
+                <div class="flex flex-wrap justify-center md:justify-start items-center text-gray-400 mt-2 gap-2">
+                    <span>{{ profile.get_orientation_display }}</span>
+                    <span class="hidden md:inline">•</span>
+                    <span class="text-white font-semibold">{{ profile.primary_location.name }}</span>
+                    
+                    {% if profile.nearby_locations.exists %}
+                    <span class="text-gray-600">|</span>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs uppercase font-bold text-gray-500">Nearby:</span>
+                        {% for loc in profile.nearby_locations.all %}
+                            <a href="#" class="text-xs bg-gray-700 hover:bg-pink-600 text-gray-300 hover:text-white px-2 py-0.5 rounded transition-colors">
+                                {{ loc.name }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="space-y-8">
+            <!-- About Section -->
+            <div class="bg-gray-800 rounded-lg p-6 border-l-4 border-pink-500 shadow-lg">
+                <h2 class="text-xl font-bold mb-4 border-b border-gray-700 pb-2">More about {{ profile.model_name }}</h2>
+                <p class="text-gray-300 whitespace-pre-wrap leading-relaxed">{{ profile.description }}</p>
+            </div>
+
+            <!-- Services Section -->
+            <div class="bg-gray-800 rounded-lg p-6">
+                <h2 class="text-xl font-bold mb-4 border-b border-gray-700 pb-2 text-gray-400">Services</h2>
+                <div class="flex flex-wrap gap-2">
+                    {% for service in profile.services.all %}
+                    <a href="#" class="bg-pink-900/40 hover:bg-pink-600 text-pink-300 hover:text-white px-4 py-1.5 rounded-full text-sm font-medium transition-all transform hover:scale-105">
+                        {{ service.name }}
+                    </a>
+                    {% empty %}
+                    <span class="text-gray-500 italic text-sm">No services listed</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Slider Section -->
+        <div class="bg-gray-800 rounded-lg p-6 shadow-xl">
+            <h2 class="text-xl font-bold mb-6 border-b border-gray-700 pb-2">Gallery</h2>
+            
+            <div class="public-gallery-slider">
+                {% for item in profile.media.all %}
+                <div class="px-2">
+                    <div class="relative aspect-[3/4] rounded-lg overflow-hidden bg-black shadow-inner border border-gray-700">
+                        {% if item.is_video %}
+                            <video src="{{ item.file.url }}" class="w-full h-full object-cover" controls playsinline></video>
+                        {% else %}
+                            <!-- Images wrapped in video element for specific UI behavior/requirement -->
+                            <video src="{{ item.file.url }}" class="w-full h-full object-cover" poster="{{ item.file.url }}" muted loop playsinline></video>
+                        {% endif %}
+                    </div>
+                </div>
+                {% empty %}
+                <div class="text-center py-20 bg-gray-900 rounded-lg border-2 border-dashed border-gray-700">
+                    <p class="text-gray-500">Gallery is empty</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.public-gallery-slider').slick({
+            dots: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 1,
+            adaptiveHeight: true,
+            prevArrow: '<button type="button" class="slick-prev absolute left-4 z-10 bg-black/50 hover:bg-pink-600 w-10 h-10 rounded-full flex items-center justify-center transition-all"><i class="fa-solid fa-chevron-left"></i></button>',
+            nextArrow: '<button type="button" class="slick-next absolute right-4 z-10 bg-black/50 hover:bg-pink-600 w-10 h-10 rounded-full flex items-center justify-center transition-all"><i class="fa-solid fa-chevron-right"></i></button>',
+        });
+
+        // Autoplay image "videos" on hover/visible
+        $('video').each(function() {
+            if (!$(this).attr('controls')) {
+                const video = this;
+                $(this).closest('.slick-slide').on('mouseenter', function() {
+                    video.play();
+                }).on('mouseleave', function() {
+                    video.pause();
+                });
+            }
+        });
+    });
+</script>
+
+<style>
+    .slick-dots li button:before {
+        color: white;
+    }
+    .slick-dots li.slick-active button:before {
+        color: #ec4899;
+    }
+    .slick-prev:before, .slick-next:before {
+        display: none;
+    }
+    .public-gallery-slider {
+        margin-bottom: 30px;
+    }
+</style>
+{% endblock %}

@@ -11,6 +11,9 @@ urlpatterns = [
     path('gallery/remove/<int:pk>/', views.GalleryRemoveView.as_view(), name='gallery_remove'),
     path('htmx/nearby-locations/', views.get_nearby_locations, name='nearby_locations_htmx'),
     
+    # Public Discovery Views
+    path('discover/model/<slug:slug>/', views.ModelPublicDetailView.as_view(), name='public_profile_detail'),
+
     # Inline Editing Endpoints
     path('profile/<slug:slug>/edit/name/', views.ModelNameUpdateView.as_view(), name='edit_name'),
     path('profile/<slug:slug>/edit/summary/', views.ShortSummaryUpdateView.as_view(), name='edit_summary'),

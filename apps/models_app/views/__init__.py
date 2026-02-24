@@ -1,7 +1,8 @@
 from .main import (
     ModelListView, 
     OnboardingView, 
-    ModelDetailView, 
+    ModelDetailView,
+    ModelPublicDetailView,
     GalleryUploadView, 
     GalleryRemoveView,
     ModelNameUpdateView,
