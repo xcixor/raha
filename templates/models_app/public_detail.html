@@ -9,11 +9,11 @@
 
 <div class="max-w-4xl mx-auto">
     <!-- Header Section -->
-    <div class="bg-black/60 border border-white/10 rounded-lg p-6 mb-8 flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-6">
+    <div class="bg-black/40 border border-white/10 rounded-lg p-6 mb-8 flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-6">
         <img src="{{ profile.pfp.url }}" class="w-32 h-32 rounded-full object-cover border-4 border-pink-500 shadow-xl">
         
         <div class="flex-1 text-center md:text-left">
-            <div class="bg-white/30 p-4 rounded-xl mb-4">
+            <div class="bg-black/60 p-4 rounded-xl mb-4">
                 <h1 class="text-4xl font-bold">{{ profile.model_name }}</h1>
                 
                 <div class="mt-2 space-y-1">
@@ -64,13 +64,13 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div class="space-y-8">
             <!-- About Section -->
-            <div class="bg-black/60 border border-white/10 rounded-lg p-6 border-l-4 border-l-pink-500 shadow-lg">
+            <div class="bg-black/40 border border-white/10 rounded-lg p-6 border-l-4 border-l-pink-500 shadow-lg">
                 <h2 class="text-xl font-bold mb-4 border-b border-gray-700 pb-2">More about {{ profile.model_name }}</h2>
                 <p class="text-gray-300 whitespace-pre-wrap leading-relaxed">{{ profile.description }}</p>
             </div>
 
             <!-- Services Section -->
-            <div class="bg-black/60 border border-white/10 rounded-lg p-6">
+            <div class="bg-black/40 border border-white/10 rounded-lg p-6">
                 <h2 class="text-xl font-bold mb-4 border-b border-gray-700 pb-2 text-gray-400">Services</h2>
                 <div class="flex flex-wrap gap-2">
                     {% for service in profile.services.all %}
@@ -85,7 +85,7 @@
         </div>
 
         <!-- Slider Section -->
-        <div class="bg-black/60 border border-white/10 rounded-lg p-6 shadow-xl">
+        <div class="bg-black/40 border border-white/10 rounded-lg p-6 shadow-xl">
             <h2 class="text-xl font-bold mb-6 border-b border-gray-700 pb-2">Gallery</h2>
             
             <div class="public-gallery-slider">

@@ -6,11 +6,11 @@
         <div class="relative aspect-[3/4]">
             <img src="{{ profile.pfp.url }}" alt="{{ profile.model_name }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
 
-            <!-- Main glass container: high opacity, no blur -->
-            <div class="absolute bottom-2 left-2 right-2 p-2 bg-black/60 rounded-lg border border-white/10 shadow-2xl">
+            <!-- Main glass container -->
+            <div class="absolute bottom-2 left-2 right-2 p-2 bg-black/40 rounded-lg border border-white/10 shadow-2xl">
                 
-                <!-- Inner details container: lower opacity than parent, padded -->
-                <div class="bg-white/30 p-3 rounded-md mb-2">
+                <!-- Inner details container: slightly darker than parent -->
+                <div class="bg-black/60 p-3 rounded-md mb-2">
                     <h2 class="text-lg font-bold truncate leading-tight">{{ profile.model_name }}</h2>
                     <p class="text-sm text-gray-300 flex items-center mb-1">
                         <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
