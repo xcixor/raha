@@ -63,7 +63,7 @@
                 <form hx-post="{% url 'models:gallery_upload' %}" 
                       hx-target="#gallery" 
                       hx-swap="afterbegin" 
-                      hx-indicator="#gallery-indicator"
+                      hx-indicator="this"
                       hx-on::after-request="this.reset(); $data.fileSelected = false; $data.isVideo = false;"
                       enctype="multipart/form-data" 
                       class="mb-6 bg-gray-700 p-4 rounded">
