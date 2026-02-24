@@ -3,10 +3,9 @@
     <a href="{% url 'models:public_profile_detail' slug=model.slug %}" class="group block bg-gray-800 rounded-xl overflow-hidden hover:ring-2 hover:ring-pink-500 transition-all duration-300">
         <div class="relative aspect-[3/4]">
             <img src="{{ model.pfp.url }}" alt="{{ model.model_name }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-80"></div>
             
-            <div class="absolute bottom-0 left-0 right-0 p-4">
-                <h2 class="text-lg font-bold truncate">{{ model.model_name }}</h2>
+            <div class="absolute bottom-2 left-2 right-2 p-3 bg-black/40 backdrop-blur-md rounded-lg border border-white/10">
+                <h2 class="text-lg font-bold truncate leading-tight">{{ model.model_name }}</h2>
                 <p class="text-sm text-gray-300 flex items-center mb-1">
                     <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
