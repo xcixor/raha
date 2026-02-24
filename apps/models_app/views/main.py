@@ -29,7 +29,8 @@ class ModelListView(ListView):
     ordering = ['-created_at']
 
     def get_queryset(self):
-        queryset = ModelProfile.objects.filter(is_active=True).select_related('primary_location').order_by('-created_at')
+        # We start with ModelProfile and only filter by the core fields first
+        queryset = ModelProfile.objects.filter(is_active=True).select_related('primary_location')
         
         county_slug = self.request.GET.get('county')
         location_slug = self.request.GET.get('location')
@@ -40,10 +41,13 @@ class ModelListView(ListView):
         elif county_slug and county_slug != 'all':
             queryset = queryset.filter(primary_location__group__county__slug=county_slug)
             
-        if service_slug:
+        if service_slug and service_slug != 'all':
             queryset = queryset.filter(services__slug=service_slug)
             
-        return queryset.distinct()
+        # Crucial: Use values_list('id') to get a unique set of model IDs first, 
+        # then return a clean queryset of those models to avoid M2M join duplications
+        profile_ids = queryset.values_list('id', flat=True).distinct()
+        return ModelProfile.objects.filter(id__in=profile_ids).select_related('primary_location').order_by('-created_at')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
