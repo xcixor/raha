@@ -1,10 +1,10 @@
 <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
     {% for model in models %}
-    <a href="{% url 'models:public_profile_detail' slug=model.slug %}" class="group block bg-gray-800 rounded-xl overflow-hidden hover:ring-2 hover:ring-pink-500 transition-all duration-300">
+    <a href="{% url 'models:public_profile_detail' slug=model.slug %}" class="group block rounded-xl overflow-hidden transition-all duration-300">
         <div class="relative aspect-[3/4]">
             <img src="{{ model.pfp.url }}" alt="{{ model.model_name }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            
-            <div class="absolute bottom-2 left-2 right-2 p-2 bg-black/40 backdrop-blur-md rounded-lg border border-white/10">
+
+            <div class="absolute bottom-2 left-2 right-2 p-2 bg-black/70 rounded-lg border border-white/10">
                 <div class="bg-white/5 p-2 rounded-md mb-2">
                     <h2 class="text-lg font-bold truncate leading-tight">{{ model.model_name }}</h2>
                     <p class="text-sm text-gray-300 flex items-center mb-1">
@@ -15,9 +15,9 @@
                     </p>
                     <p class="text-xs text-pink-400 italic font-medium truncate">{{ model.short_summary }}</p>
                 </div>
-                
+
                 <!-- Contact Buttons -->
-                <div class="flex space-x-2" x-data="{ 
+                <div class="flex space-x-2" x-data="{
                     openWa(phone) {
                         const link = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
                             ? `https://wa.me/${phone}`
@@ -25,18 +25,18 @@
                         window.open(link, '_blank');
                     }
                 }">
-                    <a href="tel:{{ model.user.phone_number }}" 
-                       @click.stop 
+                    <a href="tel:{{ model.user.phone_number }}"
+                       @click.stop
                        class="flex-1 bg-gray-700 hover:bg-gray-600 text-white text-[10px] font-bold py-1.5 rounded flex items-center justify-center transition-colors">
                         <i class="fa-solid fa-phone mr-1"></i> CALL
                     </a>
-                    <button @click.stop.prevent="openWa('{{ model.whatsapp_number }}')" 
+                    <button @click.stop.prevent="openWa('{{ model.whatsapp_number }}')"
                             class="flex-1 bg-green-600 hover:bg-green-700 text-white text-[10px] font-bold py-1.5 rounded flex items-center justify-center transition-colors">
                         <i class="fa-brands fa-whatsapp mr-1 text-sm"></i> WHATSAPP
                     </button>
                 </div>
             </div>
-            
+
             {% if model.is_verified %}
             <div class="absolute top-2 right-2 bg-blue-500 text-white p-1 rounded-full">
                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -58,9 +58,9 @@
     {% if page_obj.has_previous %}
     <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.county %}&county={{ request.GET.county }}{% endif %}{% if request.GET.location %}&location={{ request.GET.location }}{% endif %}{% if request.GET.service %}&service={{ request.GET.service }}{% endif %}" class="bg-gray-800 px-4 py-2 rounded hover:bg-pink-600 transition">Previous</a>
     {% endif %}
-    
+
     <span class="bg-gray-700 px-4 py-2 rounded text-pink-500 font-bold">{{ page_obj.number }}</span>
-    
+
     {% if page_obj.has_next %}
     <a href="?page={{ page_obj.next_page_number }}{% if request.GET.county %}&county={{ request.GET.county }}{% endif %}{% if request.GET.location %}&location={{ request.GET.location }}{% endif %}{% if request.GET.service %}&service={{ request.GET.service }}{% endif %}" class="bg-gray-800 px-4 py-2 rounded hover:bg-pink-600 transition">Next</a>
     {% endif %}
