@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container mx-auto px-4" x-data="{ 
+<div x-data="{ 
     activeCounty: '{{ active_county.slug|default:'nairobi' }}',
     activeLocation: '{{ active_location_slug|default:'all' }}',
     activeService: '{{ request.GET.service|default:'all' }}'
 }">
     <!-- County Selector Row -->
     <div class="mb-4">
-        <h3 class="text-xs font-bold text-gray-500 uppercase mb-3 ml-1">Popular Counties</h3>
+        <h3 class="text-xs font-bold text-gray-500 uppercase mb-3">Popular Counties</h3>
         <div class="flex items-center space-x-2 overflow-x-auto pb-2 no-scrollbar">
             {% for county in counties %}
             <button hx-get="{% url 'models:filter_locations_htmx' %}?county={{ county.slug }}"
