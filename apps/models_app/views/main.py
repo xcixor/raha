@@ -118,6 +118,7 @@ class BaseProfileUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView)
         return self.request.user == profile.user
 
     def get(self, request, *args, **kwargs):
+        print(f"DEBUG: GET request for {self.__class__.__name__}, mode: {request.GET.get('mode')}")
         if request.GET.get('mode') == 'display':
             self.object = self.get_object()
             return render(self.request, self.display_template, {
