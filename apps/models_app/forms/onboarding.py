@@ -47,6 +47,42 @@ class ModelOnboardingForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+class ModelNameUpdateForm(forms.ModelForm):
+    class Meta:
+        model = ModelProfile
+        fields = ['model_name']
+        widgets = {
+            'model_name': forms.TextInput(attrs={'class': 'w-full bg-gray-900 border border-gray-700 text-white rounded p-2 focus:border-pink-500 outline-none'}),
+        }
+
+class ShortSummaryUpdateForm(forms.ModelForm):
+    class Meta:
+        model = ModelProfile
+        fields = ['short_summary']
+        widgets = {
+            'short_summary': forms.TextInput(attrs={'class': 'w-full bg-gray-900 border border-gray-700 text-white rounded p-2 focus:border-pink-500 outline-none'}),
+        }
+
+class DescriptionUpdateForm(forms.ModelForm):
+    class Meta:
+        model = ModelProfile
+        fields = ['description']
+
+class OrientationUpdateForm(forms.ModelForm):
+    class Meta:
+        model = ModelProfile
+        fields = ['orientation']
+
+class LocationUpdateForm(forms.ModelForm):
+    class Meta:
+        model = ModelProfile
+        fields = ['primary_location', 'nearby_locations']
+
+class ServicesUpdateForm(forms.ModelForm):
+    class Meta:
+        model = ModelProfile
+        fields = ['services']
+
 class GalleryUploadForm(forms.ModelForm):
     class Meta:
         model = ModelProfile

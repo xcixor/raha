@@ -6,6 +6,18 @@
     <title>{% block title %}Raha{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .htmx-indicator {
+            opacity: 0;
+            transition: opacity 200ms ease-in;
+            pointer-events: none;
+        }
+        .htmx-request .htmx-indicator, .htmx-request.htmx-indicator {
+            opacity: 1;
+            pointer-events: all;
+        }
+    </style>
 </head>
 <body class="bg-gray-900 text-white min-h-screen">
     <nav class="p-4 border-b border-gray-800">

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from ..models import Location
 
 def get_nearby_locations(request):
-    primary_location_id = request.GET.get('primary_location_id')
+    primary_location_id = request.GET.get('primary_location_id') or request.GET.get('primary_location')
     if not primary_location_id:
         return render(request, 'models_app/partials/nearby_locations_options.html', {'locations': []})
 

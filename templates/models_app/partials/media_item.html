@@ -1,4 +1,4 @@
-<div class="relative group aspect-square bg-gray-900 rounded-lg overflow-hidden border border-gray-700">
+<div id="media-item-{{ media.pk }}" class="relative group aspect-square bg-gray-900 rounded-lg overflow-hidden border border-gray-700">
     {% if media.is_video %}
         <video src="{{ media.file.url }}" class="w-full h-full object-cover"></video>
         <div class="absolute inset-0 flex items-center justify-center bg-black/40">
@@ -8,7 +8,13 @@
         <img src="{{ media.file.url }}" alt="Gallery Item" class="w-full h-full object-cover">
     {% endif %}
     
-    <button class="absolute top-2 right-2 p-1 bg-red-600 rounded-full opacity-0 group-hover:opacity-100 transition">
-        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    {% if is_owner or request.user == media.profile.user %}
+    <button hx-delete="{% url 'models:gallery_remove' pk=media.pk %}"
+            hx-target="#media-item-{{ media.pk }}"
+            hx-swap="outerHTML"
+            hx-confirm="Are you sure you want to remove this from your gallery?"
+            class="absolute top-2 right-2 p-1 bg-red-600 rounded-full opacity-0 group-hover:opacity-100 transition shadow-lg">
+        <i class="fa-solid fa-trash-can text-[10px] text-white"></i>
     </button>
+    {% endif %}
 </div>

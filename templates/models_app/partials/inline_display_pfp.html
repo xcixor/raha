@@ -1,0 +1,11 @@
+<div id="pfp-container" class="relative group">
+    <img src="{{ profile.pfp.url }}" class="w-32 h-32 rounded-full object-cover border-4 border-pink-500">
+    {% if is_owner %}
+    <button hx-get="{% url 'models:edit_pfp' slug=profile.slug %}" 
+            hx-target="#pfp-container" 
+            hx-swap="outerHTML"
+            class="absolute bottom-0 right-0 bg-pink-600 w-8 h-8 rounded-full text-white shadow-lg opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+        <i class="fa-solid fa-pencil text-xs"></i>
+    </button>
+    {% endif %}
+</div>

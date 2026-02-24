@@ -26,8 +26,17 @@ class OpenCVFaceBlurrer(FaceBlurrer):
 
     def blur(self, image_field, mode='blur'):
         # Read image
-        image_field.seek(0)
-        file_content = image_field.read()
+        if hasattr(image_field, 'file'):
+            image_field.seek(0)
+            file_content = image_field.read()
+        else:
+            # Handle SimpleUploadedFile or ContentFile
+            try:
+                image_field.seek(0)
+            except (AttributeError, ValueError):
+                pass
+            file_content = image_field.read()
+
         if not file_content:
             return image_field
             

@@ -1,0 +1,13 @@
+<div id="orientation-container" class="group inline-block">
+    <div class="flex items-center space-x-2">
+        <span>{{ profile.get_orientation_display }}</span>
+        {% if is_owner %}
+        <button hx-get="{% url 'models:edit_orientation' slug=profile.slug %}" 
+                hx-target="#orientation-container" 
+                hx-swap="outerHTML"
+                class="text-gray-500 hover:text-pink-500 opacity-0 group-hover:opacity-100 transition-opacity">
+            <i class="fa-solid fa-pencil text-[10px]"></i>
+        </button>
+        {% endif %}
+    </div>
+</div>

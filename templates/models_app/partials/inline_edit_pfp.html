@@ -1,0 +1,32 @@
+<div id="pfp-container" class="w-32 relative">
+    <form hx-post="{% url 'models:edit_pfp' slug=profile.slug %}" 
+          hx-target="#pfp-container" 
+          hx-swap="outerHTML" 
+          hx-encoding="multipart/form-data"
+          hx-indicator="#pfp-indicator"
+          class="space-y-2">
+        {% csrf_token %}
+        <input type="file" name="pfp" class="text-xs text-gray-400 w-full" required>
+        <div class="bg-gray-700 p-2 rounded text-[10px] space-y-1">
+            <span class="font-bold text-gray-400 uppercase">Protection</span>
+            <select name="privacy_protection" class="bg-gray-800 border-none text-white w-full rounded p-1">
+                <option value="none">None</option>
+                <option value="blur">Blur</option>
+                <option value="emoji">Emoji 😎</option>
+            </select>
+        </div>
+        <div class="flex space-x-1 relative">
+            <button type="submit" class="bg-pink-600 px-2 py-1 rounded text-xs flex-1 font-bold">Save</button>
+            <button type="button" 
+                    hx-get="{% url 'models:profile_detail' slug=profile.slug %}" 
+                    hx-target="#pfp-container" 
+                    hx-swap="outerHTML"
+                    hx-select="#pfp-container"
+                    class="bg-gray-700 px-2 py-1 rounded text-xs">Cancel</button>
+            
+            <div id="pfp-indicator" class="htmx-indicator absolute inset-0 flex items-center justify-center bg-gray-800/50 rounded">
+                <i class="fa-solid fa-circle-notch animate-spin text-pink-500"></i>
+            </div>
+        </div>
+    </form>
+</div>

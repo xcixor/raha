@@ -3,26 +3,31 @@
 {% block content %}
 <div class="max-w-4xl mx-auto">
     <div class="bg-gray-800 rounded-lg p-6 mb-8 flex items-center space-x-6">
-        <img src="{{ profile.pfp.url }}" class="w-32 h-32 rounded-full object-cover border-4 border-pink-500">
-        <div>
-            <h1 class="text-4xl font-bold">{{ profile.model_name }}</h1>
-            <p class="text-gray-400 mt-2">{{ profile.get_orientation_display }} • {{ profile.primary_location.name }}</p>
-            {% if profile.nearby_locations.exists %}
-            <p class="text-gray-500 text-sm mt-1">Nearby: {{ profile.nearby_locations.all|join:", " }}</p>
-            {% endif %}
+        {% include "models_app/partials/inline_display_pfp.html" %}
+        
+        <div class="flex-1">
+            {% include "models_app/partials/inline_display_model_name.html" %}
+            
+            <div class="mt-2 space-y-1">
+                {% include "models_app/partials/inline_display_short_summary.html" %}
+                
+                <div class="flex items-center text-gray-400 mt-2">
+                    {% include "models_app/partials/inline_display_orientation.html" %}
+                    <span class="mx-2">•</span>
+                    {% include "models_app/partials/inline_display_location.html" %}
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="bg-gray-800 rounded-lg p-6">
-            <h2 class="text-xl font-bold mb-4 border-b border-gray-700 pb-2">Description</h2>
-            <p class="text-gray-300 whitespace-pre-wrap">{{ profile.description }}</p>
-            
-            <h2 class="text-xl font-bold mt-6 mb-4 border-b border-gray-700 pb-2">Services</h2>
-            <div class="flex flex-wrap gap-2">
-                {% for service in profile.services.all %}
-                <span class="bg-pink-900/50 text-pink-300 px-3 py-1 rounded-full text-sm">{{ service.name }}</span>
-                {% endfor %}
+        <div class="space-y-8">
+            <div class="bg-gray-800 rounded-lg p-6">
+                {% include "models_app/partials/inline_display_description.html" %}
+            </div>
+
+            <div class="bg-gray-800 rounded-lg p-6">
+                {% include "models_app/partials/inline_display_services.html" %}
             </div>
         </div>
 

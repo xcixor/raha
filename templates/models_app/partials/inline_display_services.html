@@ -1,0 +1,20 @@
+<div id="services-container" class="group">
+    <div class="flex items-center justify-between mb-4 border-b border-gray-700 pb-2">
+        <h2 class="text-xl font-bold">Services</h2>
+        {% if is_owner %}
+        <button hx-get="{% url 'models:edit_services' slug=profile.slug %}" 
+                hx-target="#services-container" 
+                hx-swap="outerHTML"
+                class="text-gray-500 hover:text-pink-500 opacity-0 group-hover:opacity-100 transition-opacity">
+            <i class="fa-solid fa-pencil text-sm"></i>
+        </button>
+        {% endif %}
+    </div>
+    <div class="flex flex-wrap gap-2">
+        {% for service in profile.services.all %}
+        <span class="bg-pink-900/50 text-pink-300 px-3 py-1 rounded-full text-sm">{{ service.name }}</span>
+        {% empty %}
+        <span class="text-gray-500 italic text-sm">No services listed</span>
+        {% endfor %}
+    </div>
+</div>
