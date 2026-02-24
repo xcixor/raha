@@ -29,27 +29,26 @@ class ModelListView(ListView):
     ordering = ['-created_at']
 
     def get_queryset(self):
-        # 1. Start with initial active models
-        queryset = ModelProfile.objects.filter(is_active=True).select_related('primary_location')
+        # 1. Start with initial filtering
+        qs = ModelProfile.objects.filter(is_active=True)
         
         county_slug = self.request.GET.get('county')
         location_slug = self.request.GET.get('location')
         service_slug = self.request.GET.get('service')
 
-        # 2. Apply filters
         if location_slug and location_slug != 'all':
-            queryset = queryset.filter(primary_location__slug=location_slug)
+            qs = qs.filter(primary_location__slug=location_slug)
         elif county_slug and county_slug != 'all':
-            queryset = queryset.filter(primary_location__group__county__slug=county_slug)
+            qs = qs.filter(primary_location__group__county__slug=county_slug)
             
         if service_slug and service_slug != 'all':
-            queryset = queryset.filter(services__slug=service_slug)
+            qs = qs.filter(services__slug=service_slug)
             
-        # 3. Get unique IDs to absolutely prevent duplication from M2M joins
-        profile_ids = queryset.values_list('id', flat=True).distinct()
+        # 2. Extract unique IDs to a list to kill any M2M join duplications at the source
+        unique_ids = list(qs.values_list('id', flat=True).distinct())
         
-        # 4. Return clean unique queryset
-        return ModelProfile.objects.filter(id__in=profile_ids).select_related('primary_location').order_by('-created_at')
+        # 3. Return a clean, sorted queryset
+        return ModelProfile.objects.filter(id__in=unique_ids).select_related('primary_location').order_by('-created_at')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
