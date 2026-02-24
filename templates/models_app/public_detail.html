@@ -28,7 +28,7 @@
                     <div class="flex flex-wrap gap-2">
                         <span class="text-xs uppercase font-bold text-gray-500">Nearby:</span>
                         {% for loc in profile.nearby_locations.all %}
-                            <a href="#" class="text-xs bg-gray-700 hover:bg-pink-600 text-gray-300 hover:text-white px-2 py-0.5 rounded transition-colors">
+                            <a href="{% url 'models:list' %}?county={{ loc.group.county.slug }}&location={{ loc.slug }}" class="text-xs bg-gray-700 hover:bg-pink-600 text-gray-300 hover:text-white px-2 py-0.5 rounded transition-colors">
                                 {{ loc.name }}
                             </a>
                         {% endfor %}
@@ -52,7 +52,7 @@
                 <h2 class="text-xl font-bold mb-4 border-b border-gray-700 pb-2 text-gray-400">Services</h2>
                 <div class="flex flex-wrap gap-2">
                     {% for service in profile.services.all %}
-                    <a href="#" class="bg-pink-900/40 hover:bg-pink-600 text-pink-300 hover:text-white px-4 py-1.5 rounded-full text-sm font-medium transition-all transform hover:scale-105">
+                    <a href="{% url 'models:list' %}?service={{ service.slug }}" class="bg-pink-900/40 hover:bg-pink-600 text-pink-300 hover:text-white px-4 py-1.5 rounded-full text-sm font-medium transition-all transform hover:scale-105">
                         {{ service.name }}
                     </a>
                     {% empty %}
