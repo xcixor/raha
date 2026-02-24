@@ -11,7 +11,7 @@
 
     <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
         {% for model in models %}
-        <a href="{% url 'models:profile_detail' slug=model.slug %}" class="group block bg-gray-800 rounded-xl overflow-hidden hover:ring-2 hover:ring-pink-500 transition-all duration-300">
+        <a href="{% url 'models:public_profile_detail' slug=model.slug %}" class="group block bg-gray-800 rounded-xl overflow-hidden hover:ring-2 hover:ring-pink-500 transition-all duration-300">
             <div class="relative aspect-[3/4]">
                 <img src="{{ model.pfp.url }}" alt="{{ model.model_name }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-80"></div>
