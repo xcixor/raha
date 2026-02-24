@@ -13,4 +13,4 @@ from .main import (
     ServicesUpdateView,
     PFPUpdateView
 )
-from .htmx import get_nearby_locations
+from .htmx import get_nearby_locations, filter_locations_by_county

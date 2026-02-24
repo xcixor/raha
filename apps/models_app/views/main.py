@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.urls import reverse
 from django.db import transaction
+from django.utils.translation import gettext as _
 from ..forms import (
     ModelOnboardingForm, 
     ModelNameUpdateForm,
@@ -28,7 +29,55 @@ class ModelListView(ListView):
     ordering = ['-created_at']
 
     def get_queryset(self):
-        return ModelProfile.objects.filter(is_active=True).select_related('primary_location').order_by('-created_at')
+        queryset = ModelProfile.objects.filter(is_active=True).select_related('primary_location').order_by('-created_at')
+        
+        county_slug = self.request.GET.get('county')
+        location_slug = self.request.GET.get('location')
+        service_slug = self.request.GET.get('service')
+
+        if location_slug and location_slug != 'all':
+            queryset = queryset.filter(primary_location__slug=location_slug)
+        elif county_slug and county_slug != 'all':
+            queryset = queryset.filter(primary_location__group__county__slug=county_slug)
+            
+        if service_slug:
+            queryset = queryset.filter(services__slug=service_slug)
+            
+        return queryset.distinct()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        from ..models import County, Location
+        
+        # Popular/Top Counties
+        context['counties'] = County.objects.all()[:10] 
+        
+        # Default to Nairobi if no county selected
+        active_county_slug = self.request.GET.get('county', 'nairobi')
+        try:
+            active_county = County.objects.get(slug=active_county_slug)
+        except County.DoesNotExist:
+            active_county = County.objects.first()
+            
+        context['active_county'] = active_county
+        context['locations'] = Location.objects.filter(group__county=active_county).order_by('name')
+        context['active_location_slug'] = self.request.GET.get('location', 'all')
+        
+        return context
+
+    def get(self, request, *args, **kwargs):
+        if request.headers.get('HX-Request') and not request.headers.get('HX-Target') == 'location-row':
+            self.object_list = self.get_queryset()
+            allow_empty = self.get_allow_empty()
+
+            if not allow_empty:
+                if self.get_paginate_by(self.object_list) is not None and hasattr(self.object_list, 'exists') and not self.object_list.exists():
+                    raise Http404(_("Empty list and '%(class_name)s.allow_empty' is False.") % {
+                        'class_name': self.__class__.__name__,
+                    })
+            context = self.get_context_data()
+            return render(request, 'models_app/partials/model_grid.html', context)
+        return super().get(request, *args, **kwargs)
 
 class ModelDetailView(DetailView):
     model = ModelProfile

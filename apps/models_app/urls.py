@@ -10,6 +10,7 @@ urlpatterns = [
     path('gallery/upload/', views.GalleryUploadView.as_view(), name='gallery_upload'),
     path('gallery/remove/<int:pk>/', views.GalleryRemoveView.as_view(), name='gallery_remove'),
     path('htmx/nearby-locations/', views.get_nearby_locations, name='nearby_locations_htmx'),
+    path('htmx/filter-locations/', views.filter_locations_by_county, name='filter_locations_htmx'),
     
     # Public Discovery Views
     path('discover/model/<slug:slug>/', views.ModelPublicDetailView.as_view(), name='public_profile_detail'),

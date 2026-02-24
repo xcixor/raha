@@ -1,60 +1,60 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container mx-auto px-4">
-    <div class="flex justify-between items-center mb-8">
-        <h1 class="text-3xl font-bold text-pink-500">Available Models</h1>
-        <div class="text-gray-400">
-            Showing {{ models.count }} models
-        </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
-        {% for model in models %}
-        <a href="{% url 'models:public_profile_detail' slug=model.slug %}" class="group block bg-gray-800 rounded-xl overflow-hidden hover:ring-2 hover:ring-pink-500 transition-all duration-300">
-            <div class="relative aspect-[3/4]">
-                <img src="{{ model.pfp.url }}" alt="{{ model.model_name }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-80"></div>
-                
-                <div class="absolute bottom-0 left-0 right-0 p-4">
-                    <h2 class="text-lg font-bold truncate">{{ model.model_name }}</h2>
-                    <p class="text-sm text-gray-300 flex items-center mb-1">
-                        <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
-                        </svg>
-                        {{ model.primary_location.name }}
-                    </p>
-                    <p class="text-xs text-pink-400 italic font-medium truncate">{{ model.short_summary }}</p>
-                </div>
-                
-                {% if model.is_verified %}
-                <div class="absolute top-2 right-2 bg-blue-500 text-white p-1 rounded-full">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path>
-                    </svg>
-                </div>
-                {% endif %}
+<div class="container mx-auto px-4" x-data="{ 
+    activeCounty: '{{ active_county.slug|default:'nairobi' }}',
+    activeLocation: '{{ active_location_slug|default:'all' }}'
+}">
+    <!-- County Selector Row -->
+    <div class="mb-4">
+        <h3 class="text-xs font-bold text-gray-500 uppercase mb-3 ml-1">Popular Counties</h3>
+        <div class="flex items-center space-x-2 overflow-x-auto pb-2 no-scrollbar">
+            {% for county in counties %}
+            <button hx-get="{% url 'models:filter_locations_htmx' %}?county={{ county.slug }}"
+                    hx-target="#location-row"
+                    hx-indicator="#location-loader"
+                    @click="activeCounty = '{{ county.slug }}'; activeLocation = 'all'"
+                    :class="activeCounty === '{{ county.slug }}' ? 'border-pink-500 text-pink-500' : 'border-gray-700 text-gray-400 hover:border-gray-500'"
+                    class="px-4 py-1.5 rounded-lg border-2 text-sm font-bold transition-all whitespace-nowrap">
+                {{ county.name }}
+            </button>
+            {% endfor %}
+            <div id="location-loader" class="htmx-indicator ml-2">
+                <i class="fa-solid fa-circle-notch animate-spin text-pink-500"></i>
             </div>
-        </a>
-        {% empty %}
-        <div class="col-span-full text-center py-20 bg-gray-800 rounded-2xl">
-            <p class="text-xl text-gray-400">No models available in this area yet.</p>
         </div>
-        {% endfor %}
     </div>
 
-    {% if is_paginated %}
-    <div class="mt-12 flex justify-center space-x-2">
-        {% if page_obj.has_previous %}
-        <a href="?page={{ page_obj.previous_page_number }}" class="bg-gray-800 px-4 py-2 rounded hover:bg-pink-600 transition">Previous</a>
-        {% endif %}
-        
-        <span class="bg-gray-700 px-4 py-2 rounded text-pink-500 font-bold">{{ page_obj.number }}</span>
-        
-        {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}" class="bg-gray-800 px-4 py-2 rounded hover:bg-pink-600 transition">Next</a>
-        {% endif %}
+    <!-- Location Selector Row -->
+    <div class="mb-8 min-h-[50px]">
+        <div id="location-row">
+            {% include "models_app/partials/location_row_items.html" with locations=locations active_county=active_county active_location_slug=active_location_slug %}
+        </div>
     </div>
-    {% endif %}
+
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold">Discover Models</h1>
+        <div id="grid-loader" class="htmx-indicator">
+            <div class="flex items-center space-x-2 text-pink-500">
+                <i class="fa-solid fa-circle-notch animate-spin"></i>
+                <span class="text-xs font-bold uppercase">Filtering...</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Model Grid -->
+    <div id="model-grid">
+        {% include "models_app/partials/model_grid.html" with models=models %}
+    </div>
 </div>
+
+<style>
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+</style>
 {% endblock %}
