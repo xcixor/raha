@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Q
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponse, Http404
@@ -35,6 +36,15 @@ class ModelListView(ListView):
         county_slug = self.request.GET.get('county')
         location_slug = self.request.GET.get('location')
         service_slug = self.request.GET.get('service')
+        search_query = self.request.GET.get('q')
+
+        if search_query:
+            qs = qs.filter(
+                Q(model_name__icontains=search_query) |
+                Q(services__name__icontains=search_query) |
+                Q(primary_location__name__icontains=search_query) |
+                Q(primary_location__group__county__name__icontains=search_query)
+            )
 
         if location_slug and location_slug != 'all':
             qs = qs.filter(primary_location__slug=location_slug)
