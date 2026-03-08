@@ -1,0 +1,10 @@
+django
+django-environ
+django-htmx
+pillow
+opencv-python-headless
+numpy
+pytest
+pytest-django
+gunicorn
+psycopg2-binary
