@@ -92,7 +92,7 @@ class ModelSearchTests(TestCase):
 
     def test_search_partial_match(self):
         url = reverse('models:list')
-        response = self.client.get(url, {'q': 'ali'}) 
+        response = self.client.get(url, {'q': 'Alic'}) 
         self.assertContains(response, "Alice")
         self.assertNotContains(response, "Bob")
 
