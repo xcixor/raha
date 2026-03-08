@@ -98,9 +98,29 @@ tar -czvf raha_backup_$(date +%F).tar.gz media_data/ db_data/ .env
 docker-compose -f docker-compose.prod.yml up -d
 ```
 
-## 🔮 Future Expansion: Cloudflare Tunnel
+## 🔮 The Cloudflare Tunnel (Anonymous Mode)
 
-To expose the app to the internet securely without port forwarding:
-1.  Install `cloudflared` on the laptop (or add as a docker service).
-2.  Authenticate with Cloudflare.
-3.  Route traffic: `Internet -> Cloudflare -> Tunnel -> Local Nginx (Port 80)`.
+To expose the app securely to the internet without revealing your home IP:
+
+### 1. Generate a Tunnel Token
+1.  **Log in to Cloudflare Dashboard** -> **Zero Trust** -> **Access** -> **Tunnels**.
+2.  Click **Create a Tunnel**. Name it (e.g., `raha-home`).
+3.  Choose **Docker** as your environment.
+4.  Copy the token from the provided command (look for `token: eyJh...`).
+
+### 2. Configure the Tunnel
+Add the token to your `.env` file:
+```bash
+TUNNEL_TOKEN=eyJhIjoi...
+```
+
+### 3. Configure the Public Hostname
+In the Cloudflare Dashboard (Tunnel settings):
+1.  Add a **Public Hostname** (e.g., `raha.yourdomain.com`).
+2.  Set **Service** to `http://nginx:80`. (This points the tunnel to your local Nginx container).
+
+### 4. Restart
+```bash
+docker-compose -f docker-compose.prod.yml up -d
+```
+Your app is now live at `https://raha.yourdomain.com` with full SSL encryption and your IP hidden.

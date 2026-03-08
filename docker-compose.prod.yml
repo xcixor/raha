@@ -33,3 +33,10 @@ services:
       - "80:80"
     depends_on:
       - web
+
+  tunnel:
+    image: cloudflare/cloudflared
+    restart: always
+    command: tunnel run
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
