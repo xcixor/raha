@@ -1,5 +1,5 @@
 <div id="orientation-container" class="bg-gray-700 p-2 rounded inline-block relative">
-    <form hx-post="{% url 'models:edit_orientation' slug=profile.slug %}" 
+    <form hx-post="{% url 'models:edit_orientation' slug=object.slug %}" 
           hx-target="#orientation-container" 
           hx-swap="outerHTML"
           hx-indicator="#orientation-indicator"
@@ -7,14 +7,14 @@
         {% csrf_token %}
         <select name="orientation" class="bg-gray-900 border border-gray-600 text-white rounded text-xs p-1 outline-none">
             {% for value, label in form.fields.orientation.choices %}
-                <option value="{{ value }}" {% if profile.orientation == value %}selected{% endif %}>{{ label }}</option>
+                <option value="{{ value }}" {% if object.orientation == value %}selected{% endif %}>{{ label }}</option>
             {% endfor %}
         </select>
         <button type="submit" class="text-pink-500 hover:text-pink-400 transition-colors">
             <i class="fa-solid fa-check"></i>
         </button>
         <button type="button" 
-                hx-get="{% url 'models:edit_orientation' slug=profile.slug %}?mode=display" 
+                hx-get="{% url 'models:edit_orientation' slug=object.slug %}?mode=display" 
                 hx-target="#orientation-container" 
                 hx-swap="outerHTML"
                 class="text-gray-400 hover:text-white transition-colors">
