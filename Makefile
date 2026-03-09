@@ -1,4 +1,4 @@
 ci-test:
 	docker-compose up -d
-	docker-compose exec -T web PYTHONPATH=. DJANGO_SETTINGS_MODULE=config.settings python3 manage.py test apps.accounts.tests apps.models_app.tests
+	docker-compose exec -T -e PYTHONPATH=. -e DJANGO_SETTINGS_MODULE=config.settings web python3 manage.py test apps.accounts apps.models_app
 	docker-compose down
