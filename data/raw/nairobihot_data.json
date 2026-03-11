@@ -1,0 +1,1022 @@
+{
+    "locations": [
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Allsops"
+        },
+        {
+            "county": "Machakos",
+            "group": "General",
+            "name": "Athi River"
+        },
+        {
+            "county": "Kiambu",
+            "group": "General",
+            "name": "Banana"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Buru Buru"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Chokaa"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Dagoretti"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Dandora"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Donholm"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Eastlands"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Eastleigh"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Embakasi"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Garden City"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Githurai 44"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Githurai 45"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Homeland"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Hurlingham"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Huruma"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Imara Daima"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Jamhuri"
+        },
+        {
+            "county": "Machakos",
+            "group": "General",
+            "name": "Joska"
+        },
+        {
+            "county": "Kiambu",
+            "group": "General",
+            "name": "Juja"
+        },
+        {
+            "county": "Kiambu",
+            "group": "General",
+            "name": "Kabete"
+        },
+        {
+            "county": "Kiambu",
+            "group": "General",
+            "name": "Kahawa Sukari"
+        },
+        {
+            "county": "Kiambu",
+            "group": "General",
+            "name": "Kahawa Wendani"
+        },
+        {
+            "county": "Kiambu",
+            "group": "General",
+            "name": "Kahawa West"
+        },
+        {
+            "county": "Machakos",
+            "group": "General",
+            "name": "Kamulu"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Kangemi"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Karen"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Kariobangi"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Kasarani"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Kawangware"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Kayole"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Kenyatta Road"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Kibera"
+        },
+        {
+            "county": "Kiambu",
+            "group": "General",
+            "name": "Kikuyu"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Kileleshwa"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Kilimani"
+        },
+        {
+            "county": "Machakos",
+            "group": "General",
+            "name": "Kitengela"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Kitisuru"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Komarock"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Langata"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Lavington"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Loresho"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Madaraka"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Makadara"
+        },
+        {
+            "county": "Machakos",
+            "group": "General",
+            "name": "Malaa"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Mathare"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Milimani"
+        },
+        {
+            "county": "Machakos",
+            "group": "General",
+            "name": "Mlolongo"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Muthaiga"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Muthangari"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Muthurwa"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Mwiki"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Nairobi Town"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Nairobi West"
+        },
+        {
+            "county": "Kiambu",
+            "group": "General",
+            "name": "Ndenderu"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Ngara"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Ngong"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Ngumba"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Njiru"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Ongata Rongai"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Pangani"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Parklands"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Roasters"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Roysambu"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Ruai"
+        },
+        {
+            "county": "Kiambu",
+            "group": "General",
+            "name": "Ruaka"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Ruaraka"
+        },
+        {
+            "county": "Kiambu",
+            "group": "General",
+            "name": "Ruiru"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Runda"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Saika"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "South B"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "South C"
+        },
+        {
+            "county": "Machakos",
+            "group": "General",
+            "name": "Syokimau"
+        },
+        {
+            "county": "Kiambu",
+            "group": "General",
+            "name": "Thika"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Thogoto"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Thome"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Umoja"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Upper Hill"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Utawala"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Uthiru"
+        },
+        {
+            "county": "Nairobi",
+            "group": "General",
+            "name": "Westlands"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Kiambu"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Kisumu"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Machakos"
+        },
+        {
+            "county": "Mombasa",
+            "group": "General",
+            "name": "Mombasa"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Nairobi"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Nakuru"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Eldoret"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Naivasha"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Meru Town"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Nanyuki"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Nyeri Town"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Machakos Town"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Embu Town"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Kisii Town"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Narok town"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Kericho Town"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Murang'a Town"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Kakamega Town"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Kitale"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Isiolo Town"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Kilifi Town"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Bomet"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Kitui Town"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Wangige"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Kerugoya"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Nyahururu"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Busia Town"
+        },
+        {
+            "county": "Mombasa",
+            "group": "General",
+            "name": "Diani"
+        },
+        {
+            "county": "Kiambu",
+            "group": "General",
+            "name": "Githunguri"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Bungoma Town"
+        },
+        {
+            "county": "Mombasa",
+            "group": "General",
+            "name": "Changamwe"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Mwea"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Migori Town"
+        },
+        {
+            "county": "Mombasa",
+            "group": "General",
+            "name": "Likoni"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Bondo"
+        },
+        {
+            "county": "Mombasa",
+            "group": "General",
+            "name": "Watamu"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Rumuruti"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Oyugis"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Kajiado Town"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Luanda"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Kimilili"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Riara Road"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Magadi Road"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Argwings Kodhek Rd"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Old Malindi road"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Links road"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Malindi Road"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Nyali Road"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Ndundori Road"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Garissa Road"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "James Gichuru Road"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Nairobi - Nyeri Highway"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Nyeri - Nanyuki Road"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Nyeri - Nyahuru Road"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Embu - Meru Highway"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Embu - Siakago Highway"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Embu - Nairobi Highway"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Southern Bypass"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Mwembe Road"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Kisii Jogoo Road"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Kisii Bomet Highway"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Gitanga Road"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Naivasha Road"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Northern Bypass"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Eastern Bypass"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Solai Road"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Manyanja Rd"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Waiyaki Way"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Kiambu Road"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Langata Road"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Outering Road"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Kangundo Road"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Ngong Road"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Kamiti Road"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Jogoo Road"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Mombasa Road"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Thika Road"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Ol Kalou"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Baringo"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "bomet"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Bungoma"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Busia"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Elgeyo-Marakwet"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Embu"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Garissa"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "homa bay"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Isiolo"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Kajiado"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Kakamega"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Kericho"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Kilifi"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Kirinyaga"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Kisii"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Kitui"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Kwale"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Laikipia"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Lamu"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Makueni"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Mandera"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Marsabit"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Meru"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Migori"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Murang'a"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Nandi"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Narok"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Nyamira"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Nyandarua"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Nyeri"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Samburu"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Siaya"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Taita-Taveta"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Tana River"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Tharaka-Nithi"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Trans Nzoia"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Turkana"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Uasin Gishu"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Vihiga"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "Wajir"
+        },
+        {
+            "county": "Other Regions",
+            "group": "General",
+            "name": "West Pokot"
+        }
+    ],
+    "services": [
+        "Incall",
+        "Outcall",
+        "Overnight",
+        "GFE (Girlfriend Experience)",
+        "Massage",
+        "Anal",
+        "Oral",
+        "Roleplay",
+        "BDSM",
+        "Threesome",
+        "Cum in Mouth"
+    ]
+}

@@ -6,3 +6,5 @@ opencv-python-headless
 numpy
 pytest
 pytest-django
+cloudscraper
+beautifulsoup4
